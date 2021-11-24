@@ -4,14 +4,12 @@ services:
 
   app:
     build: 
-      context: .docker/node
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: .docker/node/Dockerfile
     container_name: app
     entrypoint: dockerize -wait tcp://mysql:3306 -timeout 20s node index.js
     networks: 
       - node-network
-    volumes: 
-      - ./node:/usr/src/app
     tty: true
     depends_on: 
        - mysql
